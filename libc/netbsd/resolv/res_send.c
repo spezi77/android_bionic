@@ -772,7 +772,7 @@ send_vc(res_state statp,
 		int mark_size = sizeof(old_mark);
 		if (getpeername(statp->_vcsock,
 				&peer.generic, &size) < 0 ||
-		    !sock_eq(&peer.generic, nsap)) {
+		    !sock_eq(&peer.generic, nsap) ||
 			getsockopt(statp->_vcsock, SOL_SOCKET, SO_MARK, &old_mark, &mark_size) < 0 ||
 			old_mark != statp->_mark) {
 			res_nclose(statp);

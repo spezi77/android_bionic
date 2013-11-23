@@ -499,6 +499,7 @@ libc_common_cflags := \
     -D_LIBC=1 \
     -DFLOATING_POINT \
     -DINET6 \
+	-Wno-error=strict-aliasing \
     -I$(LOCAL_PATH)/private \
     -DPOSIX_MISTAKE \
     -DLOG_ON_HEAP_ERROR \
@@ -512,12 +513,12 @@ endif
 # the appropriate BoardConfig.mk file.
 #
 ifneq ($(BOARD_MALLOC_ALIGNMENT),)
-  libc_common_cflags += -DMALLOC_ALIGNMENT=$(BOARD_MALLOC_ALIGNMENT)
+  libc_common_cflags += -DMALLOC_ALIGNMENT=$(BOARD_MALLOC_ALIGNMENT) -Wno-error=strict-aliasing
 endif
 
 ifeq ($(TARGET_ARCH),arm)
   libc_common_cflags += -DSOFTFLOAT
-  libc_common_cflags += -fstrict-aliasing
+  libc_common_cflags += -fstrict-aliasing -Wno-error=strict-aliasing
   libc_crt_target_cflags := -mthumb-interwork
 endif # !arm
 
@@ -720,6 +721,7 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(libc_tzcode_src_files)
 LOCAL_CFLAGS := \
     $(libc_common_cflags) \
+	-Wno-error=strict-aliasing \
     -std=gnu99 \
     -DSTD_INSPIRED=1 \
     -DTZDIR=\"/system/usr/share/zoneinfo\" \
@@ -745,6 +747,7 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(libc_upstream_freebsd_src_files)
 LOCAL_CFLAGS := \
     $(libc_common_cflags) \
+	-Wno-error=strict-aliasing \
     -I$(LOCAL_PATH)/upstream-freebsd \
     -I$(LOCAL_PATH)/upstream-freebsd/libc/include \
     -include upstream-freebsd/freebsd-compat.h

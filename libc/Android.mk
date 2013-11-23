@@ -45,7 +45,6 @@ libc_common_src_files := \
 	stdio/wbuf.c \
 	stdlib/atexit.c \
 	stdlib/ctype_.c \
-	stdlib/exit.c \
 	stdlib/getenv.c \
 	stdlib/putenv.c \
 	stdlib/setenv.c \
@@ -342,6 +341,7 @@ libc_upstream_netbsd_src_files := \
     upstream-netbsd/libc/stdlib/div.c \
     upstream-netbsd/libc/stdlib/drand48.c \
     upstream-netbsd/libc/stdlib/erand48.c \
+    upstream-netbsd/libc/stdlib/exit.c \
     upstream-netbsd/libc/stdlib/jrand48.c \
     upstream-netbsd/libc/stdlib/ldiv.c \
     upstream-netbsd/libc/stdlib/lldiv.c \
@@ -358,20 +358,18 @@ libc_upstream_netbsd_src_files := \
     upstream-netbsd/libc/string/strcasestr.c \
     upstream-netbsd/libc/string/strcoll.c \
     upstream-netbsd/libc/string/strxfrm.c \
+    upstream-netbsd/libc/thread-stub/__isthreaded.c \
     upstream-netbsd/libc/unistd/killpg.c \
 
 # Architecture specific source files go here
 # =========================================================
 ifeq ($(TARGET_ARCH),arm)
 libc_common_src_files += \
-	bionic/memmove.c.arm \
-	string/bcopy.c \
 	string/strncmp.c \
 	string/strncat.c \
 	string/strncpy.c \
 	bionic/strchr.cpp \
 	string/strrchr.c \
-	bionic/memchr.c \
 	bionic/memrchr.c \
 	string/index.c \
 	bionic/strnlen.c \
@@ -398,6 +396,13 @@ libc_static_common_src_files += \
     bionic/pthread.c.arm \
     bionic/pthread_create.cpp.arm \
     bionic/pthread_key.cpp.arm \
+
+# cortex-a9 without neon
+ifneq ($(TARGET_CPU_VARIANT),tegra2)
+    libc_common_src_files += \
+	bionic/memchr.c \
+
+endif # cortex-a9 without neon
 
 endif # arm
 

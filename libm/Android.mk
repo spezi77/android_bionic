@@ -248,7 +248,6 @@ else
       upstream-freebsd/lib/msun/src/e_sqrtf.c \
       upstream-freebsd/lib/msun/src/e_sqrt.c
     endif
-  libm_arm_cflags += -DKRAIT_NEON_OPTIMIZATION
 endif
 
 libm_x86_includes := $(LOCAL_PATH)/i386 $(LOCAL_PATH)/i387

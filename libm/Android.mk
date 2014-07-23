@@ -115,7 +115,6 @@ libm_common_src_files += \
     upstream-freebsd/lib/msun/src/s_fdim.c \
     upstream-freebsd/lib/msun/src/s_finite.c \
     upstream-freebsd/lib/msun/src/s_finitef.c \
-    upstream-freebsd/lib/msun/src/s_floor.c \
     upstream-freebsd/lib/msun/src/s_floorf.c \
     upstream-freebsd/lib/msun/src/s_fma.c \
     upstream-freebsd/lib/msun/src/s_fmaf.c \
@@ -226,17 +225,19 @@ libm_arm_includes := $(LOCAL_PATH)/arm
 libm_arm_src_files := arm/fenv.c
 ifeq ($(TARGET_CPU_VARIANT),krait)
   libm_arm_src_files += \
-	arm/e_pow.S	\
-	arm/s_cos.S	\
-	arm/s_sin.S	\
-	arm/e_sqrtf.S	\
-	arm/e_sqrt.S
+    arm/e_pow.S \
+    arm/s_cos.S \
+    arm/s_floor.S \
+    arm/s_sin.S \
+    arm/e_sqrtf.S \
+    arm/e_sqrt.S
   libm_arm_cflags += -DQCOM_NEON_OPTIMIZATION -fno-if-conversion
 else
   ifeq ($(TARGET_USE_QCOM_BIONIC_OPTIMIZATION),true)
     libm_arm_src_files += \
       arm/e_pow.S \
       arm/s_cos.S \
+      arm/s_floor.S \
       arm/s_sin.S \
       arm/e_sqrtf.S \
       arm/e_sqrt.S
@@ -244,12 +245,12 @@ else
   else
     libm_common_src_files += \
       upstream-freebsd/lib/msun/src/s_cos.c \
+      upstream-freebsd/lib/msun/src/s_floor.c \
       upstream-freebsd/lib/msun/src/s_sin.c \
       upstream-freebsd/lib/msun/src/e_sqrtf.c \
       upstream-freebsd/lib/msun/src/e_sqrt.c
   endif
 endif
-
 
 libm_x86_includes := $(LOCAL_PATH)/i386 $(LOCAL_PATH)/i387
 libm_x86_src_files := i387/fenv.c

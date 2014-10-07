@@ -306,6 +306,14 @@ ENTRY(cos)
     .word           .Ltwo_over_pi-(.LPICtwo_over_pi0+8)
 END(cos)
 
+#if (__LDBL_MANT_DIG__ == 53)
+.weak cosl
+.equ  cosl, cos
+#else
+ENTRY(cosl)
+END(cosl)
+#endif
+
     .section        .rodata.npio2_hw,"a",%progbits
     .align          2
 .Lnpio2_hw = . + 0

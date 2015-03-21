@@ -1273,7 +1273,7 @@ int soinfo::Relocate(ElfW(Rela)* rela, unsigned count) {
         break;
 
       case R_AARCH64_COPY:
-        if ((si->flags & FLAG_EXE) == 0) {
+        if ((flags & FLAG_EXE) == 0) {
             /*
               * http://infocenter.arm.com/help/topic/com.arm.doc.ihi0044d/IHI0044D_aaelf.pdf
               *
@@ -1285,7 +1285,7 @@ int soinfo::Relocate(ElfW(Rela)* rela, unsigned count) {
               * We should explicitly disallow ET_DYN executables from having
               * R_AARCH64_COPY relocations.
               */
-            DL_ERR("%s R_AARCH64_COPY relocations only supported for ET_EXEC", si->name);
+            DL_ERR("%s R_AARCH64_COPY relocations only supported for ET_EXEC", name);
             return -1;
         }
         count_relocation(kRelocCopy);
@@ -1296,26 +1296,26 @@ int soinfo::Relocate(ElfW(Rela)* rela, unsigned count) {
                    (sym_addr + rela->r_addend),
                    sym_name);
         if (reloc == (sym_addr + rela->r_addend)) {
-            ElfW(Sym)* src = soinfo_do_lookup(NULL, sym_name, &lsi, needed);
+            ElfW(Sym)* src = soinfo_do_lookup(NULL, sym_name, &lsi);
 
             if (src == NULL) {
-                DL_ERR("%s R_AARCH64_COPY relocation source cannot be resolved", si->name);
+                DL_ERR("%s R_AARCH64_COPY relocation source cannot be resolved", name);
                 return -1;
             }
             if (lsi->has_DT_SYMBOLIC) {
                 DL_ERR("%s invalid R_AARCH64_COPY relocation against DT_SYMBOLIC shared "
-                       "library %s (built with -Bsymbolic?)", si->name, lsi->name);
+                       "library %s (built with -Bsymbolic?)", name, lsi->name);
                 return -1;
             }
             if (s->st_size < src->st_size) {
                 DL_ERR("%s R_AARCH64_COPY relocation size mismatch (%lld < %lld)",
-                       si->name, s->st_size, src->st_size);
+                       name, s->st_size, src->st_size);
                 return -1;
             }
             memcpy(reinterpret_cast<void*>(reloc),
                    reinterpret_cast<void*>(src->st_value + lsi->load_bias), src->st_size);
         } else {
-            DL_ERR("%s R_AARCH64_COPY relocation target cannot be resolved", si->name);
+            DL_ERR("%s R_AARCH64_COPY relocation target cannot be resolved", name);
             return -1;
         }
         break;
@@ -1501,7 +1501,7 @@ int soinfo::Relocate(ElfW(Rel)* rel, unsigned count) {
         *reinterpret_cast<ElfW(Addr)*>(reloc) += sym_addr - rel->r_offset;
         break;
       case R_ARM_COPY:
-            if ((si->flags & FLAG_EXE) == 0) {
+            if ((flags & FLAG_EXE) == 0) {
                 /*
                  * http://infocenter.arm.com/help/topic/com.arm.doc.ihi0044d/IHI0044D_aaelf.pdf
                  *
@@ -1513,33 +1513,33 @@ int soinfo::Relocate(ElfW(Rel)* rel, unsigned count) {
                  * We should explicitly disallow ET_DYN executables from having
                  * R_ARM_COPY relocations.
                  */
-                DL_ERR("%s R_ARM_COPY relocations only supported for ET_EXEC", si->name);
+                DL_ERR("%s R_ARM_COPY relocations only supported for ET_EXEC", name);
                 return -1;
             }
             count_relocation(kRelocCopy);
             MARK(rel->r_offset);
             TRACE_TYPE(RELO, "RELO %08x <- %d @ %08x %s", reloc, s->st_size, sym_addr, sym_name);
             if (reloc == sym_addr) {
-                ElfW(Sym)* src = soinfo_do_lookup(NULL, sym_name, &lsi, needed);
+                ElfW(Sym)* src = soinfo_do_lookup(NULL, sym_name, &lsi);
 
                 if (src == NULL) {
-                    DL_ERR("%s R_ARM_COPY relocation source cannot be resolved", si->name);
+                    DL_ERR("%s R_ARM_COPY relocation source cannot be resolved", name);
                     return -1;
                 }
                 if (lsi->has_DT_SYMBOLIC) {
                     DL_ERR("%s invalid R_ARM_COPY relocation against DT_SYMBOLIC shared "
-                           "library %s (built with -Bsymbolic?)", si->name, lsi->name);
+                           "library %s (built with -Bsymbolic?)", name, lsi->name);
                     return -1;
                 }
                 if (s->st_size < src->st_size) {
                     DL_ERR("%s R_ARM_COPY relocation size mismatch (%d < %d)",
-                           si->name, s->st_size, src->st_size);
+                           name, s->st_size, src->st_size);
                     return -1;
                 }
                 memcpy(reinterpret_cast<void*>(reloc),
                        reinterpret_cast<void*>(src->st_value + lsi->load_bias), src->st_size);
             } else {
-                DL_ERR("%s R_ARM_COPY relocation target cannot be resolved", si->name);
+                DL_ERR("%s R_ARM_COPY relocation target cannot be resolved", name);
                 return -1;
             }
             break;

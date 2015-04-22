@@ -95,6 +95,7 @@
 */
 
 	prfm    PLDL1KEEP, [src]
+	prfm    pldl1strm, [src, #64] 
 	add	srcend, src, count
 	add	dstend, dstin, count
         cmp     count, 16
@@ -195,6 +196,7 @@ L(copy_long):
 	ldp	C_l, C_h, [src, 48]
 	stp	D_l, D_h, [dst, 64]!
 	ldp	D_l, D_h, [src, 64]!
+	prfm    pldl1strm, [src, #(4*64)]
 	subs	count, count, 64
 	b.hi	1b
 

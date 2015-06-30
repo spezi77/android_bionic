@@ -79,7 +79,6 @@ END(__pthread_clone)
 
 ENTRY(__bionic_clone)
     mov     ip, sp
-    .save   {r4, r5, r6, r7}
 
     # save registers to parent stack
     stmfd   sp!, {r4, r5, r6, r7}

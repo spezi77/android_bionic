@@ -63,11 +63,8 @@ ENTRY(memcpy)
           To try and improve performance, stack layout changed,
           i.e., not keeping the stack looking like users expect
           (highest numbered register at highest address).  */
-        .save   {r0, lr}
         push    {r0, lr}
-        .save   {r4, r5}
         strd    r4, r5, [sp, #-8]!
-        .save   {r6, r7}
         strd    r6, r7, [sp, #-8]!
 
        /* TODO: Add debug frame directives.

@@ -74,7 +74,6 @@ ENTRY(__memcmp16)
         bx          lr
 
 
-        .save {r4, lr}
         /* save registers */
 0:      stmfd       sp!, {r4, lr}
         

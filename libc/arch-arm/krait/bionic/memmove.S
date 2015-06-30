@@ -78,7 +78,6 @@ END(bcopy)
 
 ENTRY(memmove)
 _memmove_words:
-	.save	{r0, lr}
 	cmp	r2, #0
 	it	ne
 	subsne	r12, r0, r1	// Warning: do not combine these "it" blocks

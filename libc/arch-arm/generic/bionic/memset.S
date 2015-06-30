@@ -63,7 +63,6 @@ ENTRY(memset)
         /* compute the offset to align the destination
          * offset = (4-(src&3))&3 = -src & 3
          */
-        .save       {r0, r4-r7, lr}
         stmfd       sp!, {r0, r4-r7, lr}
         rsb         r3, r0, #0
         ands        r3, r3, #3

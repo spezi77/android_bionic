@@ -107,7 +107,6 @@ ENTRY(memcmp)
         bmi        10f
 #endif
 
-        .save {r4, lr}
         /* save registers */
         stmfd       sp!, {r4, lr}
 

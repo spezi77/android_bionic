@@ -5,7 +5,6 @@
 
 ENTRY(__waitid)
     mov     ip, sp
-    .save   {r4, r5, r6, r7}
     stmfd   sp!, {r4, r5, r6, r7}
     ldmfd   ip, {r4, r5, r6}
     ldr     r7, =__NR_waitid

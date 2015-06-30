@@ -43,7 +43,6 @@
 #endif
 
 ENTRY(memcpy)
-        .save       {r0, lr}
         /* start preloading as early as possible */
         pld         [r1, #(CACHE_LINE_SIZE * 0)]
         stmfd       sp!, {r0, lr}
@@ -344,7 +343,6 @@ ENTRY(memcpy)
 		 * ARM ABI. Since we have to save R0, we might as well save R4
 		 * which we can use for better pipelining of the reads below
 		 */
-        .save       {r0, r4, lr}
         stmfd       sp!, {r0, r4, lr}
         /* Making room for r5-r11 which will be spilled later */
         .pad        #28

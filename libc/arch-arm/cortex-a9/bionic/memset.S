@@ -43,7 +43,6 @@ ENTRY(__memset_chk)
 
         // Preserve lr for backtrace.
         push        {lr}
-        .save       {lr}
         .cfi_def_cfa_offset 4
         .cfi_rel_offset lr, 0
 
@@ -73,7 +72,6 @@ ENTRY(memset)
         bhi         __memset_large_copy
 
         stmfd       sp!, {r0}
-        .save       {r0}
         .cfi_def_cfa_offset 4
         .cfi_rel_offset r0, 0
 
@@ -115,7 +113,6 @@ ENTRY(__memset_large_copy)
          * offset = (4-(src&3))&3 = -src & 3
          */
         stmfd       sp!, {r0, r4-r7, lr}
-        .save       {r0, r4-r7, lr}
         .cfi_def_cfa_offset 24
         .cfi_rel_offset r0, 0
         .cfi_rel_offset r4, 4

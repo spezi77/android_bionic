@@ -52,7 +52,6 @@ ENTRY(memset)
         cmp         r2, #NEON_MEMSET_DIVIDER
         bhi         11f
 #endif
-        .save       {r0}
         stmfd       sp!, {r0}
 
         vdup.8      q0, r1
@@ -134,7 +133,6 @@ ENTRY(memset)
 		 * offset = (4-(src&3))&3 = -src & 3
 		 */
 
-        .save       {r0, r4-r7, lr}
 		stmfd		sp!, {r0, r4-r7, lr}
 		rsb			r3, r0, #0
 		ands		r3, r3, #3

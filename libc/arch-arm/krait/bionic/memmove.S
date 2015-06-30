@@ -70,17 +70,14 @@
 	.thumb_func
 
 ENTRY(bcopy)
-        .cfi_startproc
 	mov	r12, r0
 	mov	r0, r1
 	mov	r1, r12
         // Fall through to memmove
-        .cfi_endproc
 END(bcopy)
 
 ENTRY(memmove)
 _memmove_words:
-        .cfi_startproc
 	.save	{r0, lr}
 	cmp	r2, #0
 	it	ne
@@ -214,6 +211,5 @@ _memmove_words:
 	ldrbmi	r12, [r1]
 	strbmi	r12, [r0]
 	bx	lr
-	.cfi_endproc
 END(memmove)
 

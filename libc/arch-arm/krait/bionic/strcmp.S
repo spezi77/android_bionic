@@ -170,7 +170,6 @@ ENTRY(strcmp)
 #endif /* not  __ARMEB__ */
         .endm /* setup_return */
 
-        .cfi_startproc
         pld [r0, #0]
         pld [r1, #0]
 
@@ -496,5 +495,4 @@ ENTRY(strcmp)
     .cfi_restore r7
 
 	bx	lr
-    .cfi_endproc
 END(strcmp)

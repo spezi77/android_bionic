@@ -43,7 +43,7 @@
 // Prototype: void *memchr(const void *s, int c, size_t n);
 
 #include <machine/asm.h>
-#include "private/libc_events.h"
+#include "libc_events.h"
 
 	.syntax unified
 	.arch armv7-a

@@ -57,7 +57,7 @@
 #error "Either STPCPY or STRCPY must be defined."
 #endif
 
-#include <private/bionic_asm.h>
+#include <machine/asm.h>
 
     .syntax unified
 

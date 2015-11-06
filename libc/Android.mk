@@ -588,8 +588,7 @@ endif
 libc_common_cflags += \
     -Werror=pointer-to-int-cast \
     -Werror=int-to-pointer-cast \
-    -Werror=type-limits \
-    -Werror \
+    -Werror=type-limits
 
 ifeq ($(strip $(DEBUG_BIONIC_LIBC)),true)
   libc_common_cflags += -DDEBUG

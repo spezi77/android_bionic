@@ -580,10 +580,7 @@ ifneq ($(TARGET_USES_LOGD),false)
 libc_common_cflags += -DTARGET_USES_LOGD
 endif
 
-use_clang := $(USE_CLANG_PLATFORM_BUILD)
-ifeq ($(use_clang),)
-  use_clang := false
-endif
+use_clang := false
 
 # Try to catch typical 32-bit assumptions that break with 64-bit pointers.
 libc_common_cflags += \
@@ -664,6 +661,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 include $(BUILD_STATIC_LIBRARY)
@@ -705,6 +703,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 include $(BUILD_STATIC_LIBRARY)
@@ -745,6 +744,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 include $(BUILD_STATIC_LIBRARY)
@@ -778,6 +778,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_freebsd_src_files))
@@ -815,6 +816,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_netbsd_src_files))
@@ -856,6 +858,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 include $(BUILD_STATIC_LIBRARY)
@@ -894,6 +897,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_openbsd_src_files))
@@ -932,6 +936,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 include $(BUILD_STATIC_LIBRARY)
@@ -957,6 +962,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_bionic_src_files))
@@ -985,6 +991,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_bionic_ndk_src_files))
@@ -1006,6 +1013,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -1033,6 +1041,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -1064,6 +1073,7 @@ LOCAL_ADDRESS_SANITIZER := false
 # libprofile_rt isn't prebuilt, and it would be tricky to write a rule that
 # would make sure libprofile_rt is built.
 LOCAL_NATIVE_COVERAGE := false
+LOCAL_ARM_MODE := arm
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -1085,6 +1095,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -1107,6 +1118,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -1134,6 +1146,7 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes)
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
+LOCAL_ARM_MODE := arm
 
 LOCAL_SRC_FILES := \
     $(libc_common_src_files) \
@@ -1217,6 +1230,7 @@ LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_common_src_files))
@@ -1255,6 +1269,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_arch_static_src_files))
@@ -1279,6 +1294,8 @@ LOCAL_CXX_STL := none
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
+LOCAL_ARM_MODE := arm
+
 include $(BUILD_STATIC_LIBRARY)
 
 
@@ -1311,6 +1328,7 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_arch_static_src_files))
@@ -1403,6 +1421,7 @@ LOCAL_SRC_FILES_arm += \
 
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 # Allow devices to provide additional symbols
 LOCAL_WHOLE_STATIC_LIBRARIES += $(BOARD_PROVIDES_ADDITIONAL_BIONIC_STATIC_LIBS)
@@ -1462,6 +1481,7 @@ LOCAL_LDFLAGS := -Wl,--version-script,$(LOCAL_PATH)/version_script.txt
 LOCAL_MODULE_TAGS := eng
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 include $(BUILD_SHARED_LIBRARY)
@@ -1502,6 +1522,7 @@ LOCAL_LDFLAGS := -Wl,--version-script,$(LOCAL_PATH)/version_script.txt
 LOCAL_MODULE_TAGS := eng
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
 
 $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 include $(BUILD_SHARED_LIBRARY)
@@ -1534,6 +1555,8 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES := libc
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
+
 include $(BUILD_SHARED_LIBRARY)
 
 # ========================================================
@@ -1550,6 +1573,8 @@ LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES := libc
 LOCAL_ADDRESS_SANITIZER := false
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
+LOCAL_ARM_MODE := arm
+
 include $(BUILD_STATIC_LIBRARY)
 
 
